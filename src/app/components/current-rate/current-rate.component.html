@@ -1,0 +1,13 @@
+<section class="current-rate" *ngIf="exchangeRate">
+    <div class="rate-info">
+      <p>Exchange rate now</p>
+      <span>{{ exchangeRate.lastUpdatedAt | date: 'dd/MM/yyyy - HH:mm' }}</span>
+      <strong>{{ exchangeRate.fromSymbol }}/BRL</strong>
+    </div>
+  
+    <div class="rate-value">R$ {{ exchangeRate.exchangeRate | number: '1.2-2' }}</div>
+
+  
+    <button (click)="onToggle()">LAST 30 DAYS</button>
+  </section>
+  

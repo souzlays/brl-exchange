@@ -1,0 +1,19 @@
+<div class="day-card" *ngIf="day">
+    <p class="date">{{ day.date | date: 'dd/MM/yyyy' }}</p>
+  
+    <p>OPEN: R$ {{ day.open | number: '1.4-4' }}</p>
+    <p>HIGH: R$ {{ day.high | number: '1.4-4' }}</p>
+    <p>LOW: R$ {{ day.low | number: '1.4-4' }}</p>
+    <p>CLOSE: R$ {{ day.close | number: '1.4-4' }}</p>
+  
+    <p
+      class="diff"
+      [class.positive]="(day.closeDiff ?? 0) > 0"
+      [class.negative]="(day.closeDiff ?? 0) < 0"
+    >
+      CLOSE DIFF (%): {{ (day.closeDiff ?? 0) | number: '1.2-2' }}
+      <span *ngIf="(day.closeDiff ?? 0)  > 0">↑</span>
+      <span *ngIf="(day.closeDiff ?? 0)  < 0">↓</span>
+    </p>
+  </div>
+  

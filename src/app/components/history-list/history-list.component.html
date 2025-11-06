@@ -1,0 +1,11 @@
+<section class="history">
+    <h3>LAST 30 DAYS</h3>
+  
+    <div class="days">
+      <app-day-card
+        *ngFor="let item of history; let i = index"
+        [day]="item"
+      ></app-day-card>
+    </div>
+  </section>
+  
