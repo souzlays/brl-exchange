@@ -1,19 +1,64 @@
-<div class="day-card" *ngIf="day">
-    <p class="date">{{ day.date | date: 'dd/MM/yyyy' }}</p>
-  
-    <p>OPEN: R$ {{ day.open | number: '1.4-4' }}</p>
-    <p>HIGH: R$ {{ day.high | number: '1.4-4' }}</p>
-    <p>LOW: R$ {{ day.low | number: '1.4-4' }}</p>
-    <p>CLOSE: R$ {{ day.close | number: '1.4-4' }}</p>
-  
-    <p
-      class="diff"
-      [class.positive]="(day.closeDiff ?? 0) > 0"
-      [class.negative]="(day.closeDiff ?? 0) < 0"
-    >
-      CLOSE DIFF (%): {{ (day.closeDiff ?? 0) | number: '1.2-2' }}
-      <span *ngIf="(day.closeDiff ?? 0)  > 0">↑</span>
-      <span *ngIf="(day.closeDiff ?? 0)  < 0">↓</span>
-    </p>
+
+<div
+  class="bg-white pt-5 rounded-lg shadow-md border border-gray-200 p-5 w-full max-w-sm md:max-w-none text-gray-800 text-[13px] md:text-base leading-tight
+  mb-8 md:mb-10 transition-all hover:scale-[1.02] md:hover:shadow-2xl md:hover:border-cyan-300 md:rounded-xl
+  md:mx-auto md:w-[90%]"
+  *ngIf="day"
+>
+
+  <div class="text-blue-500 md:text-cyan-500 font-semibold text-sm md:text-xl mb-3 md:mb-6 md:pb-5 md:border-b md:border-gray-100 md:flex md:items-center md:justify-between">
+    <span>{{ day.date | date: 'dd/MM/yyyy' }}</span>
+    <span class="hidden md:inline-block text-xs md:text-sm text-gray-400 font-normal md:tracking-wider">
+      HISTORICAL DATA
+    </span>
   </div>
-  
+
+
+  <div class="grid grid-cols-2 gap-x-6 gap-y-3 md:gap-x-12 md:gap-y-8">
+    
+    <div class="md:bg-gray-50 md:p-4 md:rounded-lg md:transition-all md:hover:bg-cyan-50">
+      <span class="font-semibold text-gray-600 uppercase block text-[11px] md:text-xs md:tracking-widest md:mb-2">OPEN:</span>
+      <span class="font-bold text-gray-900 text-sm md:text-2xl">R$ {{ day.open | number: '1.4-4' }}</span>
+    </div>
+
+    <div class="md:bg-gray-50 md:p-4 md:rounded-lg md:transition-all md:hover:bg-cyan-50">
+      <span class="font-semibold text-gray-600 uppercase block text-[11px] md:text-xs md:tracking-widest md:mb-2">HIGH:</span>
+      <span class="font-bold text-gray-900 text-sm md:text-2xl">R$ {{ day.high | number: '1.4-4' }}</span>
+    </div>
+
+    <div class="md:bg-gray-50 md:p-4 md:rounded-lg md:transition-all md:hover:bg-cyan-50">
+      <span class="font-semibold text-gray-600 uppercase block text-[11px] md:text-xs md:tracking-widest md:mb-2">CLOSE:</span>
+      <span class="font-bold text-gray-900 text-sm md:text-2xl">R$ {{ day.close | number: '1.4-4' }}</span>
+    </div>
+
+    <div class="md:bg-gray-50 md:p-4 md:rounded-lg md:transition-all md:hover:bg-cyan-50">
+      <span class="font-semibold text-gray-600 uppercase block text-[11px] md:text-xs md:tracking-widest md:mb-2">LOW:</span>
+      <span class="font-bold text-gray-900 text-sm md:text-2xl">R$ {{ day.low | number: '1.4-4' }}</span>
+    </div>
+  </div>
+
+  <div
+    class="flex justify-between items-center mt-4 md:mt-10 border-t border-gray-100 pt-4 md:pt-8
+    md:bg-gradient-to-r md:from-gray-50 md:to-transparent md:-mx-5 md:px-9 md:-mb-5 md:pb-5 md:rounded-b-xl"
+  >
+    <span class="font-semibold text-gray-600 uppercase text-[11px] md:text-sm md:tracking-widest">
+      CLOSE DIFF (%):
+    </span>
+    <div
+      class="flex items-center font-bold text-sm md:text-2xl md:px-4 md:py-2 md:rounded-lg md:transition-all"
+      [ngClass]="{
+        'text-green-600 md:bg-green-50': (day.closeDiff ?? 0) > 0,
+        'text-red-500 md:bg-red-50': (day.closeDiff ?? 0) < 0,
+        'text-gray-500 md:bg-gray-100': (day.closeDiff ?? 0) === 0
+      }"
+    >
+      <span>{{ (day.closeDiff ?? 0) | number: '1.2-2' }}%</span>
+      <svg *ngIf="(day.closeDiff ?? 0) > 0" class="w-4 h-4 md:w-7 md:h-7 ml-1 md:ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 15l7-7 7 7" />
+      </svg>
+      <svg *ngIf="(day.closeDiff ?? 0) < 0" class="w-4 h-4 md:w-7 md:h-7 ml-1 md:ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M19 9l-7 7-7-7" />
+      </svg>
+    </div>
+  </div>
+</div>
